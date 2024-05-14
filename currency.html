@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <style>
+    body {
+        background-image: url('international.jpg');
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .converter {
+      background-color: #f8feff;
+      padding: 75px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(15, 15, 15, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="converter">
+    <h1><u>Currency Converter</u></h1>
+    
+    <label for="fromCurrency">From:</label>
+    <select id="fromCurrency">
+      <option value="usd">USD</option>
+      <option value="eur">EUR</option>
+      <option value="gbp">GBP</option>
+      <option value="inr">INR</option>
+    </select>
+    
+    <br>
+    
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" placeholder="Enter amount" />
+    
+    <br>
+    
+    <label for="toCurrency">To:</label>
+    <select id="toCurrency">
+      <option value="usd">USD</option>
+      <option value="eur">EUR</option>
+      <option value="gbp">GBP</option>
+      <option value="inr">INR</option>
+    </select>
+    
+    <br>
+    
+    <button onclick="convertCurrency()">Convert</button>
+    
+    <h3>Result:</h3>
+    <p id="result">Converted amount will appear here.</p>
+  </div>
+
+  <script>
+    function convertCurrency() {
+      const fromCurrency = document.getElementById("fromCurrency").value;
+      const toCurrency = document.getElementById("toCurrency").value;
+      const amount = document.getElementById("amount").value;
+
+      // Fixed exchange rates (for demonstration purposes)
+      const exchangeRates = {
+        usd: { eur: 0.85, gbp: 0.75, inr: 73.5 },
+        eur: { usd: 1.18, gbp: 0.89, inr: 87.21 },
+        gbp: { usd: 1.33, eur: 1.12, inr: 99.57 },
+        inr: { usd: 0.014, eur: 0.011, gbp: 0.0101 }
+      };
+
+      const conversionRate = exchangeRates[fromCurrency][toCurrency];
+      const convertedAmount = (amount * conversionRate).toFixed(2);
+
+      document.getElementById("result").textContent = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
+    }
+  </script>
+</body>
+</html>
